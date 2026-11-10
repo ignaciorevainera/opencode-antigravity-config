@@ -1,0 +1,7 @@
+{
+  "remoteAccepted": true,
+  "password": "{env:OPENCODE_SERVICE_PASSWORD}",
+  "remote": {
+    "route": "d04cda69456a4cee"
+  }
+}

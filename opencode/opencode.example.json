@@ -1,0 +1,90 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "./plugins/caveman/plugin.js",
+    "@nick-vi/opencode-type-inject",
+    "envsitter-guard@latest",
+    "@dietrichgebert/ponytail",
+    [
+      "@upstash/context7-opencode",
+      {
+        "apiKey": "{env:CONTEXT7_API_KEY}"
+      }
+    ]
+  ],
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true,
+      "headers": {
+        "Authorization": "Bearer {env:CONTEXT7_API_KEY}"
+      }
+    },
+    "TestSprite": {
+      "type": "local",
+      "command": [
+        "npx",
+        "@testsprite/testsprite-mcp@latest"
+      ],
+      "environment": {
+        "API_KEY": "{env:TESTSPRITE_API_KEY}"
+      },
+      "enabled": true
+    },
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx",
+        "@playwright/mcp@latest"
+      ],
+      "enabled": true
+    },
+    "chrome-devtools": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ],
+      "enabled": true
+    },
+    "next-devtools": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "next-devtools-mcp@latest"
+      ],
+      "enabled": true
+    },
+    "supermemory": {
+      "type": "remote",
+      "url": "https://mcp.supermemory.ai/mcp",
+      "enabled": true
+    },
+    "github": {
+      "type": "remote",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "enabled": true,
+      "oauth": false,
+      "timeout": 120000,
+      "headers": {
+        "Authorization": "Bearer {env:GITHUB_PAT}"
+      }
+    },
+    "servers": {
+      "browse": {
+        "type": "local",
+        "command": [
+          "C:\\Users\\Ignacio Revainera\\.local\\bin\\browse.exe",
+          "mcp"
+        ],
+        "environment": {
+          "OPENCODE_BROWSER_RUNTIME": "auto-update"
+        }
+      }
+    }
+  },
+  "plugins": []
+}

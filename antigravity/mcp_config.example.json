@@ -1,0 +1,59 @@
+{
+  "mcpServers": {
+    "Astro": {
+      "args": ["-y", "mcp-remote", "https://mcp.docs.astro.build/mcp"],
+      "command": "npx"
+    },
+    "TestSprite": {
+      "args": ["-y", "@testsprite/testsprite-mcp@latest"],
+      "command": "npx",
+      "env": {
+        "API_KEY": "__TESTSPRITE_API_KEY__"
+      }
+    },
+    "chrome-devtools-mcp": {
+      "args": ["-y", "chrome-devtools-mcp@latest"],
+      "command": "npx"
+    },
+    "context7": {
+      "headers": {
+        "CONTEXT7_API_KEY": "__CONTEXT7_API_KEY__"
+      },
+      "serverUrl": "https://mcp.context7.com/mcp"
+    },
+    "playwright": {
+      "args": ["-y", "@playwright/mcp@latest"],
+      "command": "npx"
+    },
+    "supermemory": {
+      "headers": {
+        "Authorization": "Bearer __SUPERMEMORY_TOKEN__"
+      },
+      "serverUrl": "https://mcp.supermemory.ai/mcp"
+    },
+    "notion": {
+      "args": ["-y", "@notionhq/notion-mcp-server"],
+      "command": "npx",
+      "env": {
+        "NOTION_TOKEN": "__NOTION_TOKEN__"
+      }
+    },
+    "github-mcp-server": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "__GITHUB_PAT__"
+      }
+    },
+    "gitkraken": {
+      "command": "npx",
+      "args": ["-y", "@gitkraken/gk@latest", "mcp"]
+    },
+    "service-management": {
+      "serverUrl": "https://qacorreo.sd.cloud.invgate.net/mcp/v1",
+      "headers": {
+        "Authorization": "Bearer __INVGATE_TOKEN__"
+      }
+    }
+  }
+}

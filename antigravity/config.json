@@ -1,0 +1,230 @@
+{
+  "plugins": {
+    "chrome-devtools-plugin": {
+      "installedFrom": {
+        "id": "antigravity-plugins-official/plugin/chrome-devtools-plugin",
+        "marketplace": "antigravity-plugins-official",
+        "version": "1.10.1"
+      }
+    },
+    "code-review": {
+      "enabled": true
+    },
+    "conductor": {
+      "enabled": true
+    },
+    "context7": {
+      "installedFrom": {
+        "id": "antigravity-plugins-partners/plugin/context7",
+        "marketplace": "antigravity-plugins-partners",
+        "version": "1.0.1"
+      }
+    },
+    "gcalendar": {
+      "installedFrom": {
+        "id": "antigravity-plugins-official/plugin/gcalendar",
+        "marketplace": "antigravity-plugins-official",
+        "version": "0.0.8"
+      }
+    },
+    "gdocs": {
+      "installedFrom": {
+        "id": "antigravity-plugins-official/plugin/gdocs",
+        "marketplace": "antigravity-plugins-official",
+        "version": "0.0.9"
+      }
+    },
+    "gdrive": {
+      "installedFrom": {
+        "id": "antigravity-plugins-official/plugin/gdrive",
+        "marketplace": "antigravity-plugins-official",
+        "version": "0.0.11"
+      }
+    },
+    "gemini-api": {
+      "installedFrom": {
+        "id": "antigravity-plugins-official/plugin/gemini-api",
+        "marketplace": "antigravity-plugins-official",
+        "version": "2.4.0"
+      }
+    },
+    "google-developer-knowledge": {
+      "installedFrom": {
+        "id": "antigravity-plugins-official/plugin/google-developer-knowledge",
+        "marketplace": "antigravity-plugins-official",
+        "version": "1.0.3"
+      }
+    },
+    "google_maps_platform": {
+      "installedFrom": {
+        "id": "antigravity-plugins-official/plugin/google_maps_platform",
+        "marketplace": "antigravity-plugins-official",
+        "version": "1.0.0"
+      }
+    },
+    "gsheets": {
+      "installedFrom": {
+        "id": "antigravity-plugins-official/plugin/gsheets",
+        "marketplace": "antigravity-plugins-official",
+        "version": "0.0.8"
+      }
+    },
+    "gslides": {
+      "installedFrom": {
+        "id": "antigravity-plugins-official/plugin/gslides",
+        "marketplace": "antigravity-plugins-official",
+        "version": "0.0.8"
+      }
+    },
+    "modern-web-guidance-plugin": {
+      "enabled": true
+    },
+    "notion": {
+      "installedFrom": {
+        "id": "antigravity-plugins-partners/plugin/notion",
+        "marketplace": "antigravity-plugins-partners",
+        "version": "0.1.0-agy.287cc5f2"
+      }
+    },
+    "security": {
+      "enabled": true
+    },
+    "supabase": {
+      "installedFrom": {
+        "id": "antigravity-plugins-partners/plugin/supabase",
+        "marketplace": "antigravity-plugins-partners",
+        "version": "0.1.17-agy.a224d9f1"
+      }
+    },
+    "vercel-plugin": {
+      "installedFrom": {
+        "id": "antigravity-plugins-partners/plugin/vercel-plugin",
+        "marketplace": "antigravity-plugins-partners",
+        "version": "0.54.1-agy.4b94cb5a"
+      }
+    }
+  },
+  "sidecars": {
+    "swarm/swarm_board": {
+      "projectId": "59132ff4-adfc-45c6-a2e3-936f2b2cb90c",
+      "resolvedPermissions": {},
+      "schemaVersion": 1
+    },
+    "tests": {
+      "enabled": false,
+      "projectId": "94242c9a-cb1e-4cea-bc10-3955dcefa810",
+      "resolvedPermissions": null,
+      "schemaVersion": 1
+    },
+    "weekly-audit": {
+      "enabled": false,
+      "projectId": "86d9acef-5b63-4e60-bde1-93759e189408",
+      "resolvedPermissions": null,
+      "schemaVersion": 1
+    }
+  },
+  "userSettings": {
+    "autoExecutionPolicy": "CASCADE_COMMANDS_AUTO_EXECUTION_EAGER",
+    "conversationWidth": "CONVERSATION_WIDTH_WIDE",
+    "customThemeSeedsDark": {
+      "background": "#282C34",
+      "foregroundOverride": "#ABB2BF",
+      "primary": "#61AFEF"
+    },
+    "enableTerminalSandbox": false,
+    "globalPermissionGrants": {
+      "allow": [
+        "mcp(git/git_diff)",
+        "mcp(context7/resolve-library-id)",
+        "mcp(git/git_show)",
+        "mcp(context7/query-docs)",
+        "command($env:HYPERFRAMES_BROWSER_PATH=\"C:\\Program)",
+        "command(git)",
+        "command(git add)",
+        "command(git commit)",
+        "command(git diff)",
+        "command(git status)",
+        "command(npm run)",
+        "command(npx)",
+        "command(python)",
+        "command(pip)",
+        "command(mkdir -p docs\\superpowers\\plans)",
+        "command(npm run build)",
+        "command(git add .)",
+        "command(ls -la)",
+        "command(mkdir -p docs/superpowers/specs)",
+        "command(mkdir -p docs/superpowers/plans)",
+        "command(git rev-parse HEAD)",
+        "command(npm run lint)",
+        "command(git diff --staged)",
+        "command(npm test)",
+        "command(git log -n 5)",
+        "command(git log -n 1 --oneline)",
+        "command(git log -n 5 --oneline)",
+        "command(git status -u)",
+        "command(npm run lint \u0026\u0026 npm run build)",
+        "command(npm run lint; npm run build)",
+        "command(git diff --staged --name-only)",
+        "command(git diff .gitignore)",
+        "command(npm run lint ; npm run build)",
+        "mcp(supabase/list_tables)",
+        "mcp(supabase/execute_sql)",
+        "command(npx vitest run src/)",
+        "command(npm run test:unit)",
+        "mcp(supabase/list_migrations)",
+        "mcp(chrome-devtools-mcp/new_page)",
+        "mcp(chrome-devtools-mcp/take_screenshot)",
+        "mcp(chrome-devtools-mcp/evaluate_script)",
+        "mcp(chrome-devtools-mcp/close_page)",
+        "mcp(supabase/get_advisors)",
+        "mcp(Astro/search_astro_docs)",
+        "mcp(notion/API-get-self)",
+        "mcp(notion/API-post-search)",
+        "mcp(github-mcp-server/list_issues)",
+        "mcp(github-mcp-server/issue_write)",
+        "mcp(github-mcp-server/get_me)",
+        "mcp(playwright/browser_navigate)",
+        "mcp(playwright/browser_evaluate)",
+        "mcp(playwright/browser_close)",
+        "mcp(supabase/apply_migration)",
+        "mcp(supabase/generate_typescript_types)",
+        "read_url(github.com)",
+        "read_url(skills.sh)",
+        "mcp(github-mcp-server/search_repositories)",
+        "mcp(github-mcp-server/create_repository)",
+        "mcp(github-mcp-server/issues_create)",
+        "read_url(sgsc.vercel.app)",
+        "mcp(playwright/browser_resize)",
+        "mcp(playwright/browser_take_screenshot)",
+        "mcp(github-mcp-server/add_issue_comment)",
+        "mcp(github-mcp-server/update_issue)",
+        "mcp(github-mcp-server/search_issues)",
+        "mcp(github-mcp-server/get_issue)",
+        "read_url(releases.invgate.com)",
+        "mcp(github-mcp-server/create_issue)",
+        "mcp(gitkraken/git_log_or_diff)",
+        "mcp(gitkraken/git_worktree)",
+        "mcp(gitkraken/git_branch)",
+        "mcp(gitkraken/git_checkout)",
+        "mcp(gitkraken/git_status)",
+        "read_url(opencode.ai)",
+        "mcp(gitkraken/git_add)",
+        "mcp(gitkraken/git_commit)",
+        "mcp(supermemory/list_spaces)",
+        "mcp(supermemory/list_memories)",
+        "command(npm run check)",
+        "mcp(github-mcp-server/get_pull_request)",
+        "mcp(github-mcp-server/merge_pull_request)",
+        "read_url(wisecx.com)",
+        "mcp(github-mcp-server/list_pull_requests)",
+        "mcp(github-mcp-server/create_pull_request)"
+      ]
+    },
+    "nonWorkspaceFileAccessPolicy": "AGENT_SETTING_POLICY_ALLOW",
+    "permissionGrantsV2Migrated": true,
+    "remoteControlEnabled": true,
+    "remoteControlHostname": "ignacio",
+    "sandboxEnabledAtV2Migration": false,
+    "voiceName": "Neno"
+  }
+}
