@@ -17,7 +17,6 @@ agent-config/
 ├─ antigravity/
 │  ├─ mcp_config.example.json # placeholders __VAR__
 │  ├─ config.json             # sin secretos
-│  ├─ global_workflows/
 │  └─ plugins/                # sin auth.json ni *.gif
 ├─ .env.example
 ├─ SECRETS.md

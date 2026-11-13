@@ -92,6 +92,9 @@ if (-not (Test-Path "$ag\mcp_config.json") -and (Test-Path $mcpExample)) {
     }
 }
 
+# Remove workflow retired from repo (one-time cleanup on existing installs)
+$staleWorkflow = "$ag\global_workflows\writing-commits.md"
+if (Test-Path $staleWorkflow) { Remove-Item $staleWorkflow -Force }
 Sync-Dir "$Repo\antigravity\global_workflows" "$ag\global_workflows"
 Sync-Dir "$Repo\antigravity\plugins" "$ag\plugins"
 
