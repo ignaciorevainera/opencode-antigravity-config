@@ -40,7 +40,8 @@ pero el objetivo es que nunca queden en disco dentro del repo.
 
 - **OpenCode**: interpola `{env:VAR}` nativamente al cargar `opencode.json` y `service.json`.
   Si una variable falta, el valor queda vacío.
-- **Antigravity**: `sync.ps1` genera `~/.gemini/config/mcp_config.json` desde
+- **Antigravity**: skills en `~/.gemini/antigravity/skills`; `mcp_config.json`/`config.json`
+  en `~/.gemini/config`. `sync.ps1` genera `~/.gemini/config/mcp_config.json` desde
   `antigravity/mcp_config.example.json` reemplazando `__VAR__` por la variable de entorno.
   Definir las variables **antes** de correr `sync.ps1` por primera vez. Si `mcp_config.json`
   ya existe, no se sobrescribe.

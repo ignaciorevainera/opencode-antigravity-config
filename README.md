@@ -43,8 +43,10 @@ npm install
 
 ## Qué hace `sync.ps1`
 
-- Copia `skills/` a 4 raíces: `~/.agents/skills`, `~/.config/opencode/skills`,
-  `~/.dsh/skills` y `~/.gemini/config/skills`.
+- Copia `skills/` a 5 raíces: `~/.agents/skills`, `~/.config/opencode/skills`,
+  `~/.dsh/skills`, `~/.gemini/config/skills` y `~/.gemini/antigravity/skills`.
+  Antigravity usa `~/.gemini/antigravity/skills`; sus `mcp_config.json`/`config.json`
+  viven en `~/.gemini/config`.
 - OpenCode: si `opencode.json` o `service.json` no existen, los crea desde los
   ejemplos. `cli.json`, `tui.json`, `dcp.jsonc`, `AGENTS.md`, `package*.json`,
   `agents/`, `commands/` y `plugins/` se sincronizan desde el repo.

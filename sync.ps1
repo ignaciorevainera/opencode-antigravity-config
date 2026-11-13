@@ -30,7 +30,8 @@ $skillRoots = @(
     "$HomeDir\.agents\skills",
     "$HomeDir\.config\opencode\skills",
     "$HomeDir\.dsh\skills",
-    "$HomeDir\.gemini\config\skills"
+    "$HomeDir\.gemini\config\skills",
+    "$HomeDir\.gemini\antigravity\skills"
 )
 foreach ($root in $skillRoots) {
     Sync-Dir "$Repo\skills" $root
