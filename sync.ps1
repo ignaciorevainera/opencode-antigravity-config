@@ -1,5 +1,5 @@
-# Sync agent-config into local agent roots.
-# Usage: . .\sync.ps1 [-DryRun] [-Home <path>]
+﻿# Sync agent-config into local agent roots.
+# Usage: . .\sync.ps1 [-DryRun] [-HomeDir <path>]
 [CmdletBinding()]
 param(
     [switch]$DryRun,
@@ -11,6 +11,20 @@ if ($DryRun) { $WhatIfPreference = $true }
 $ErrorActionPreference = 'Stop'
 $Repo = $PSScriptRoot
 
+$envFile = "$Repo\.env.local"
+if (Test-Path $envFile) {
+    Get-Content $envFile | ForEach-Object {
+        $line = $_.Trim()
+        if ($line -and -not $line.StartsWith('#') -and $line -match '^([^=]+)=(.*)$') {
+            $k = $matches[1].Trim()
+            $v = $matches[2].Trim().Trim('"').Trim("'")
+            if (-not [Environment]::GetEnvironmentVariable($k)) {
+                [Environment]::SetEnvironmentVariable($k, $v, 'Process')
+            }
+        }
+    }
+}
+
 function Sync-Dir {
     param([string]$Source, [string]$Destination)
     if (-not (Test-Path $Source)) { return }
@@ -19,7 +33,7 @@ function Sync-Dir {
         return
     }
     New-Item -ItemType Directory -Force -Path $Destination | Out-Null
-    robocopy $Source $Destination /E /XD node_modules .git /XF auth.json *.gif /NFL /NDL /NJH /NJS /NP /R:1 /W:1 | Out-Null
+    robocopy $Source $Destination /MIR /XD node_modules .git /XF auth.json *.gif /NFL /NDL /NJH /NJS /NP /R:1 /W:1 | Out-Null
     if ($LASTEXITCODE -ge 8) {
         throw "robocopy falló ($LASTEXITCODE): $Source -> $Destination"
     }
@@ -30,8 +44,7 @@ $skillRoots = @(
     "$HomeDir\.agents\skills",
     "$HomeDir\.config\opencode\skills",
     "$HomeDir\.dsh\skills",
-    "$HomeDir\.gemini\config\skills",
-    "$HomeDir\.gemini\antigravity\skills"
+    "$HomeDir\.gemini\config\skills"
 )
 foreach ($root in $skillRoots) {
     Sync-Dir "$Repo\skills" $root
@@ -68,34 +81,36 @@ Sync-Dir "$Repo\opencode\plugins" "$oc\plugins"
 $ag = "$HomeDir\.gemini\config"
 New-Item -ItemType Directory -Force -Path $ag | Out-Null
 
-if (-not (Test-Path "$ag\config.json")) {
+if (Test-Path "$Repo\opencode\AGENTS.md") {
+    Copy-Item "$Repo\opencode\AGENTS.md" "$HomeDir\.gemini\GEMINI.md" -Force
+}
+
+if (Test-Path "$Repo\antigravity\config.json") {
     Copy-Item "$Repo\antigravity\config.json" "$ag\config.json" -Force
 }
 
 $mcpExample = "$Repo\antigravity\mcp_config.example.json"
 if (-not (Test-Path "$ag\mcp_config.json") -and (Test-Path $mcpExample)) {
-    $agVars = 'CONTEXT7_API_KEY', 'TESTSPRITE_API_KEY', 'GITHUB_PAT', 'SUPERMEMORY_TOKEN', 'NOTION_TOKEN', 'INVGATE_TOKEN'
+    $agVars = 'TESTSPRITE_API_KEY', 'GITHUB_PAT', 'SUPERMEMORY_TOKEN', 'INVGATE_TOKEN'
     $missing = @($agVars | Where-Object { -not [Environment]::GetEnvironmentVariable($_) })
     if ($missing.Count -gt 0) {
-        Write-Warning "Antigravity: mcp_config.json no generado. Faltan vars: $($missing -join ', ')"
+        Write-Warning "Antigravity: faltan vars ($($missing -join ', ')); sus placeholders quedarán sin reemplazar en mcp_config.json."
+    }
+    $json = Get-Content $mcpExample -Raw
+    foreach ($v in $agVars) {
+        $val = [Environment]::GetEnvironmentVariable($v)
+        if ($val) {
+            $json = $json.Replace("__${v}__", $val)
+        }
+    }
+    if ($DryRun) {
+        Write-Host "[dry-run] generaría $ag\mcp_config.json"
     } else {
-        $json = Get-Content $mcpExample -Raw
-        foreach ($v in $agVars) {
-            $json = $json.Replace("__${v}__", [Environment]::GetEnvironmentVariable($v))
-        }
-        if ($DryRun) {
-            Write-Host "[dry-run] generaría $ag\mcp_config.json"
-        } else {
-            [System.IO.File]::WriteAllText("$ag\mcp_config.json", $json, (New-Object System.Text.UTF8Encoding($false)))
-            Write-Host "Generado $ag\mcp_config.json"
-        }
+        [System.IO.File]::WriteAllText("$ag\mcp_config.json", $json, (New-Object System.Text.UTF8Encoding($false)))
+        Write-Host "Generado $ag\mcp_config.json"
     }
 }
 
-# Remove workflow retired from repo (one-time cleanup on existing installs)
-$staleWorkflow = "$ag\global_workflows\writing-commits.md"
-if (Test-Path $staleWorkflow) { Remove-Item $staleWorkflow -Force }
-Sync-Dir "$Repo\antigravity\global_workflows" "$ag\global_workflows"
 Sync-Dir "$Repo\antigravity\plugins" "$ag\plugins"
 
 Write-Host "Sync completado."
