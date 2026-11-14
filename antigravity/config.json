@@ -104,25 +104,6 @@
       }
     }
   },
-  "sidecars": {
-    "swarm/swarm_board": {
-      "projectId": "59132ff4-adfc-45c6-a2e3-936f2b2cb90c",
-      "resolvedPermissions": {},
-      "schemaVersion": 1
-    },
-    "tests": {
-      "enabled": false,
-      "projectId": "94242c9a-cb1e-4cea-bc10-3955dcefa810",
-      "resolvedPermissions": null,
-      "schemaVersion": 1
-    },
-    "weekly-audit": {
-      "enabled": false,
-      "projectId": "86d9acef-5b63-4e60-bde1-93759e189408",
-      "resolvedPermissions": null,
-      "schemaVersion": 1
-    }
-  },
   "userSettings": {
     "autoExecutionPolicy": "CASCADE_COMMANDS_AUTO_EXECUTION_EAGER",
     "conversationWidth": "CONVERSATION_WIDTH_WIDE",
@@ -138,7 +119,6 @@
         "mcp(context7/resolve-library-id)",
         "mcp(git/git_show)",
         "mcp(context7/query-docs)",
-        "command($env:HYPERFRAMES_BROWSER_PATH=\"C:\\Program)",
         "command(git)",
         "command(git add)",
         "command(git commit)",
@@ -223,7 +203,6 @@
     "nonWorkspaceFileAccessPolicy": "AGENT_SETTING_POLICY_ALLOW",
     "permissionGrantsV2Migrated": true,
     "remoteControlEnabled": true,
-    "remoteControlHostname": "ignacio",
     "sandboxEnabledAtV2Migration": false,
     "voiceName": "Neno"
   }
