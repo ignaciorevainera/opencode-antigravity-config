@@ -31,27 +31,29 @@ agent-config/
 ```powershell
 git clone https://github.com/ignaciorevainera/opencode-antigravity-config.git ~/agent-config
 cd ~/agent-config
-. .\sync.ps1              # agrega -DryRun para simular sin escribir
+. .\sync.ps1              # en Linux/macOS/WSL: ./sync.sh (soporta --dry-run)
 cd ~/.config/opencode
 npm install
+# Si usas los plugins de Antigravity con dependencias Node:
+# npm --prefix ~/.gemini/config/plugins/security/mcp-server install
+# npm --prefix ~/.gemini/config/plugins/vercel-plugin install
 ```
 
-1. Definir las variables de entorno (ver `SECRETS.md`) **antes** del primer sync.
+1. Definir las variables de entorno (ver `SECRETS.md`) o copiar `.env.example` a `.env.local` **antes** del primer sync.
 2. Completar logins OAuth / MCP en OpenCode y Antigravity.
 3. En OpenCode: `/reload`.
 
-## Qué hace `sync.ps1`
+## Qué hace `sync.ps1` / `sync.sh`
 
-- Copia `skills/` a 5 raíces: `~/.agents/skills`, `~/.config/opencode/skills`,
-  `~/.dsh/skills`, `~/.gemini/config/skills` y `~/.gemini/antigravity/skills`.
-  Antigravity usa `~/.gemini/antigravity/skills`; sus `mcp_config.json`/`config.json`
-  viven en `~/.gemini/config`.
+- Copia `skills/` a 4 raíces: `~/.agents/skills`, `~/.config/opencode/skills`,
+  `~/.dsh/skills` y `~/.gemini/config/skills`.
 - OpenCode: si `opencode.json` o `service.json` no existen, los crea desde los
   ejemplos. `cli.json`, `tui.json`, `dcp.jsonc`, `AGENTS.md`, `package*.json`,
   `agents/`, `commands/` y `plugins/` se sincronizan desde el repo.
 - Antigravity: si `~/.gemini/config/mcp_config.json` no existe, lo genera desde el
-  ejemplo reemplazando `__VAR__` con las variables de entorno. `config.json`,
-  `global_workflows/` y `plugins/` se sincronizan si faltan o cambian.
+  ejemplo reemplazando `__VAR__` con las variables de entorno. `opencode/AGENTS.md`
+  se copia también a `~/.gemini/GEMINI.md` como regla global compartida. `config.json`
+  y `plugins/` se sincronizan desde el repo.
 - No sobrescribe archivos reales con secretos ni `auth.json`.
 
 ## Seguridad
