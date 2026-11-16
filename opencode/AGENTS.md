@@ -17,15 +17,7 @@ Do not use for: refactoring, writing scripts from scratch, debugging business lo
 
 Use available MCP servers proactively when they are relevant to the task, even if the user did not explicitly mention them. If the task involves files, calendars, email, databases, project management, or any domain covered by a connected MCP, use it without waiting to be asked. Prefer MCP over web search when a connected integration can answer the question directly.
 
-Before implementing any plan — new code, file edits, refactors, configuration changes, or any multi-step task — present the plan and stop. Wait for explicit approval before executing any of it. This applies always, regardless of task size or how confident the reasoning behind the plan is. Researching, reading files, and gathering context to form the plan does not require approval; only executing changes does. Describe what will change, where, and how, then wait for the user to confirm before proceeding.
-
 Never add comments to code unless explicitly requested. When comments are requested, keep them minimal and meaningful — no obvious or decorative comments.
-
-Never run git push under any circumstances. Commits must only be made when the user explicitly requests them. Never commit automatically as part of a workflow step.
-
-When the user requests a commit, run git diff --staged --name-only first. Analyze the full diff and group files by logical change — each group becomes one commit. Never batch unrelated changes into one commit. Never split a single logical change across multiple commits. Present the proposed commit plan with each group's files and exact message, and wait for explicit confirmation before running any git commit command.
-
-All commit messages must be in English, follow Conventional Commits format (type(scope): description), imperative mood, lowercase, no period, 72 characters or fewer. Use feat, fix, style, refactor, chore, docs, test, perf, build, or ci as the type. The scope is the affected area derived from file paths. The description must say what the change does, never vague fillers like "update files" or "wip".
 
 When asked to fix a bug, fix only that bug. Do not refactor surrounding code or improve unrelated things unless asked. When asked to implement a feature, implement exactly that feature without expanding scope.
 
