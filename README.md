@@ -31,9 +31,7 @@ agent-config/
 ```powershell
 git clone https://github.com/ignaciorevainera/opencode-antigravity-config.git ~/agent-config
 cd ~/agent-config
-. .\sync.ps1              # en Linux/macOS/WSL: ./sync.sh (soporta --dry-run)
-cd ~/.config/opencode
-npm install
+. .\sync.ps1 -PersistEnv -InstallDeps   # en Linux/macOS/WSL: ./sync.sh (soporta --dry-run)
 # Si usas los plugins de Antigravity con dependencias Node:
 # npm --prefix ~/.gemini/config/plugins/security/mcp-server install
 # npm --prefix ~/.gemini/config/plugins/vercel-plugin install

@@ -1,8 +1,10 @@
 ﻿# Sync agent-config into local agent roots.
-# Usage: . .\sync.ps1 [-DryRun] [-HomeDir <path>]
+# Usage: . .\sync.ps1 [-DryRun] [-PersistEnv] [-InstallDeps] [-HomeDir <path>]
 [CmdletBinding()]
 param(
     [switch]$DryRun,
+    [switch]$PersistEnv,
+    [switch]$InstallDeps,
     [string]$HomeDir = $env:USERPROFILE
 )
 
@@ -20,6 +22,9 @@ if (Test-Path $envFile) {
             $v = $matches[2].Trim().Trim('"').Trim("'")
             if (-not [Environment]::GetEnvironmentVariable($k)) {
                 [Environment]::SetEnvironmentVariable($k, $v, 'Process')
+            }
+            if ($PersistEnv -and -not $DryRun) {
+                [Environment]::SetEnvironmentVariable($k, $v, 'User')
             }
         }
     }
@@ -112,5 +117,14 @@ if (-not (Test-Path "$ag\mcp_config.json") -and (Test-Path $mcpExample)) {
 }
 
 Sync-Dir "$Repo\antigravity\plugins" "$ag\plugins"
+
+if ($InstallDeps) {
+    if ($DryRun) {
+        Write-Host "[dry-run] npm --prefix $oc install"
+    } else {
+        npm --prefix $oc install
+        if ($LASTEXITCODE -ne 0) { throw "npm install falló ($LASTEXITCODE)" }
+    }
+}
 
 Write-Host "Sync completado."
