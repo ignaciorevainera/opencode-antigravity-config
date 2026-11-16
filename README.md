@@ -39,7 +39,16 @@ npm install
 # npm --prefix ~/.gemini/config/plugins/vercel-plugin install
 ```
 
-1. Definir las variables de entorno (ver `SECRETS.md`) o copiar `.env.example` a `.env.local` **antes** del primer sync.
+1. Definir las variables de entorno (ver `SECRETS.md`) o copiar `.env.example` a `.env.local` **antes** del primer sync. En Windows (persistente tras reinicios):
+   ```powershell
+   [Environment]::SetEnvironmentVariable("CONTEXT7_API_KEY", "", "User")
+   [Environment]::SetEnvironmentVariable("TESTSPRITE_API_KEY", "", "User")
+   [Environment]::SetEnvironmentVariable("GITHUB_PAT", "", "User")
+   [Environment]::SetEnvironmentVariable("OPENCODE_SERVICE_PASSWORD", "", "User")
+   [Environment]::SetEnvironmentVariable("SUPERMEMORY_TOKEN", "", "User")
+   [Environment]::SetEnvironmentVariable("INVGATE_TOKEN", "", "User")
+   ```
+   (Luego abrir una nueva terminal antes de ejecutar `sync.ps1`.)
 2. Completar logins OAuth / MCP en OpenCode y Antigravity.
 3. En OpenCode: `/reload`.
 
