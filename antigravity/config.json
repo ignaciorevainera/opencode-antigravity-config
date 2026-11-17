@@ -48,6 +48,13 @@
         "version": "2.4.0"
       }
     },
+    "gmail": {
+      "installedFrom": {
+        "id": "antigravity-plugins-official/plugin/gmail",
+        "marketplace": "antigravity-plugins-official",
+        "version": "0.0.7"
+      }
+    },
     "google-developer-knowledge": {
       "installedFrom": {
         "id": "antigravity-plugins-official/plugin/google-developer-knowledge",
@@ -77,7 +84,11 @@
       }
     },
     "modern-web-guidance-plugin": {
-      "enabled": true
+      "installedFrom": {
+        "id": "antigravity-plugins-official/plugin/modern-web-guidance-plugin",
+        "marketplace": "antigravity-plugins-official",
+        "version": "1.0.1"
+      }
     },
     "notion": {
       "installedFrom": {
@@ -96,12 +107,33 @@
         "version": "0.1.17-agy.a224d9f1"
       }
     },
+    "superpowers": {
+      "installedFrom": {
+        "id": "antigravity-plugins-partners/plugin/superpowers",
+        "marketplace": "antigravity-plugins-partners",
+        "version": "7.0.2"
+      }
+    },
     "vercel-plugin": {
       "installedFrom": {
         "id": "antigravity-plugins-partners/plugin/vercel-plugin",
         "marketplace": "antigravity-plugins-partners",
         "version": "0.54.1-agy.4b94cb5a"
       }
+    },
+    "virustotal": {
+      "installedFrom": {
+        "id": "antigravity-plugins-partners/plugin/virustotal",
+        "marketplace": "antigravity-plugins-partners",
+        "version": "0.1.1"
+      }
+    }
+  },
+  "sidecars": {
+    "swarm/swarm_board": {
+      "projectId": "1ed349b6-9b4c-42ec-86f1-2a4f34497266",
+      "resolvedPermissions": {},
+      "schemaVersion": 1
     }
   },
   "userSettings": {
@@ -203,6 +235,7 @@
     "nonWorkspaceFileAccessPolicy": "AGENT_SETTING_POLICY_ALLOW",
     "permissionGrantsV2Migrated": true,
     "remoteControlEnabled": true,
+    "remoteControlHostname": "b1842zacp0143-stellar-orbit",
     "sandboxEnabledAtV2Migration": false,
     "voiceName": "Neno"
   }
