@@ -32,3 +32,6 @@ antigravity/mcp_config.json
 **/sidecars/
 **/.git/
 **/*.log
+
+# Per-machine sync exclusions
+.syncignore

@@ -39,11 +39,48 @@ sync_dir() {
     return 0
   fi
   mkdir -p "$dst"
-  if command -v rsync >/dev/null 2>&1; then
-    rsync -a --delete --exclude='node_modules' --exclude='.git' --exclude='auth.json' --exclude='*.gif' "$src/" "$dst/"
-  else
-    cp -r "$src/." "$dst/"
+  local manifest="$dst/.synced-manifest" ignore_file="$REPO/.syncignore"
+  local -a ignore=() previous=() names=()
+  local line name old
+  if [[ -f "$ignore_file" ]]; then
+    while IFS= read -r line || [[ -n "$line" ]]; do
+      line="${line%$'\r'}"
+      [[ -z "$line" || "$line" == \#* ]] && continue
+      ignore+=("$line")
+    done < "$ignore_file"
   fi
+  if [[ -f "$manifest" ]]; then
+    while IFS= read -r line || [[ -n "$line" ]]; do
+      line="${line%$'\r'}"
+      [[ -n "$line" ]] && previous+=("$line")
+    done < "$manifest"
+  fi
+  shopt -s dotglob nullglob
+  for path in "$src"/*; do
+    name="$(basename "$path")"
+    names+=("$name")
+    [[ " ${ignore[*]-} " == *" $name "* ]] && continue
+    if [[ -d "$path" ]]; then
+      if command -v rsync >/dev/null 2>&1; then
+        rsync -a --delete --exclude='node_modules' --exclude='.git' --exclude='auth.json' --exclude='*.gif' "$path/" "$dst/$name/"
+      else
+        mkdir -p "$dst/$name" && cp -r "$path/." "$dst/$name/"
+      fi
+    else
+      cp "$path" "$dst/$name"
+    fi
+  done
+  shopt -u dotglob nullglob
+  for old in "${previous[@]-}"; do
+    [[ -z "$old" ]] && continue
+    if [[ " ${names[*]-} " != *" $old "* && " ${ignore[*]-} " != *" $old "* ]]; then
+      rm -rf "${dst:?}/$old"
+    fi
+  done
+  : > "$manifest"
+  for name in "${names[@]-}"; do
+    [[ " ${ignore[*]-} " == *" $name "* ]] || echo "$name" >> "$manifest"
+  done
 }
 
 # 1. Skills -> 4 roots

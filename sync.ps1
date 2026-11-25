@@ -38,10 +38,34 @@ function Sync-Dir {
         return
     }
     New-Item -ItemType Directory -Force -Path $Destination | Out-Null
-    robocopy $Source $Destination /MIR /XD node_modules .git /XF auth.json *.gif /NFL /NDL /NJH /NJS /NP /R:1 /W:1 | Out-Null
-    if ($LASTEXITCODE -ge 8) {
-        throw "robocopy falló ($LASTEXITCODE): $Source -> $Destination"
+    $manifest = Join-Path $Destination '.synced-manifest'
+    $ignoreFile = "$Repo\.syncignore"
+    $ignore = @()
+    if (Test-Path $ignoreFile) {
+        $ignore = @(Get-Content $ignoreFile | ForEach-Object { $_.Trim() } | Where-Object { $_ -and -not $_.StartsWith('#') })
     }
+    $previous = @()
+    if (Test-Path $manifest) { $previous = @(Get-Content $manifest | Where-Object { $_ }) }
+    $items = @(Get-ChildItem $Source -Force)
+    $names = @($items | ForEach-Object { $_.Name })
+    foreach ($item in $items) {
+        if ($ignore -contains $item.Name) { continue }
+        if ($item.PSIsContainer) {
+            robocopy $item.FullName (Join-Path $Destination $item.Name) /MIR /XD node_modules .git /XF auth.json *.gif /NFL /NDL /NJH /NJS /NP /R:1 /W:1 | Out-Null
+            if ($LASTEXITCODE -ge 8) {
+                throw "robocopy falló ($LASTEXITCODE): $($item.FullName)"
+            }
+        } else {
+            Copy-Item $item.FullName (Join-Path $Destination $item.Name) -Force
+        }
+    }
+    foreach ($old in $previous) {
+        if (($names -notcontains $old) -and ($ignore -notcontains $old)) {
+            $target = Join-Path $Destination $old
+            if (Test-Path $target) { Remove-Item $target -Recurse -Force }
+        }
+    }
+    Set-Content -Path $manifest -Value ($names | Where-Object { $ignore -notcontains $_ })
 }
 
 # 1. Skills -> 4 roots
