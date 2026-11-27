@@ -91,7 +91,12 @@ if ($ocMissing.Count -gt 0) {
 
 # Secret-bearing configs: only seed when missing, never overwrite.
 if (-not (Test-Path "$oc\opencode.json")) {
-    Copy-Item "$Repo\opencode\opencode.example.json" "$oc\opencode.json" -Force
+    $ocJson = (Get-Content "$Repo\opencode\opencode.example.json" -Raw).Replace('__BROWSE_BIN__', "$HomeDir\.local\bin\browse.exe".Replace('\', '\\'))
+    if ($DryRun) {
+        Write-Host "[dry-run] generaría $oc\opencode.json"
+    } else {
+        [System.IO.File]::WriteAllText("$oc\opencode.json", $ocJson, (New-Object System.Text.UTF8Encoding($false)))
+    }
 }
 if (-not (Test-Path "$oc\service.json")) {
     Copy-Item "$Repo\opencode\service.example.json" "$oc\service.json" -Force

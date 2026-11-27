@@ -78,7 +78,7 @@
       "browse": {
         "type": "local",
         "command": [
-          "C:\\Users\\Ignacio Revainera\\.local\\bin\\browse.exe",
+          "__BROWSE_BIN__",
           "mcp"
         ],
         "environment": {

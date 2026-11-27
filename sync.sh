@@ -102,7 +102,15 @@ for v in CONTEXT7_API_KEY TESTSPRITE_API_KEY GITHUB_PAT OPENCODE_SERVICE_PASSWOR
   fi
 done
 
-[[ -f "$OC/opencode.json" ]] || cp "$REPO/opencode/opencode.example.json" "$OC/opencode.json"
+if [[ ! -f "$OC/opencode.json" ]]; then
+  oc_json="$(cat "$REPO/opencode/opencode.example.json")"
+  oc_json="${oc_json//__BROWSE_BIN__/$HOME_DIR/.local/bin/browse}"
+  if $DRY_RUN; then
+    echo "[dry-run] generaría $OC/opencode.json"
+  else
+    printf '%s' "$oc_json" > "$OC/opencode.json"
+  fi
+fi
 [[ -f "$OC/service.json" ]] || cp "$REPO/opencode/service.example.json" "$OC/service.json"
 
 for f in cli.json tui.json dcp.jsonc AGENTS.md package.json package-lock.json; do
